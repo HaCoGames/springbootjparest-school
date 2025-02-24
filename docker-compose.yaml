@@ -1,0 +1,26 @@
+version: '2'
+services:
+  Watten-Backend:
+    image: watten_backend
+    container_name: Watten-Backend
+    command: java -jar /app.jar
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://WattenDB:3306/db
+
+  mysqldb:
+    image: mysql
+    container_name: WattenDB
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_USER: usr
+      MYSQL_PASSWORD: pwd
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
