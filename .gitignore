@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+
+### GENERATED REQUIREMENTS ###
+*.pdf
