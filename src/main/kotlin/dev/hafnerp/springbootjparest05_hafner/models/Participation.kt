@@ -39,6 +39,8 @@ class Participation {
     var ownBooth : Boolean = false
     @Column
     var needsSpace : Int = 0
-    @OneToOne(mappedBy = "participation", orphanRemoval = true, cascade = arrayOf(CascadeType.ALL))
-    lateinit var booths : ArrayList<Booth>
+    @ManyToOne
+    lateinit var booth : Booth
+    @ManyToOne
+    lateinit var event : Event
 }

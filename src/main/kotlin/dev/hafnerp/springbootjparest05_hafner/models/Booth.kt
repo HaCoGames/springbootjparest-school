@@ -31,6 +31,6 @@ class Booth {
     var width : Int = 0
     @Column
     var height : Int = 0
-    @ManyToOne
-    lateinit var participation : Participation;
+    @OneToMany(mappedBy = "booth", orphanRemoval = true, cascade = arrayOf(CascadeType.ALL))
+    lateinit var participations : ArrayList<Participation>
 }
