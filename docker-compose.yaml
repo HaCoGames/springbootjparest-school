@@ -1,0 +1,33 @@
+version: '2'
+services:
+  Business-Day-Backend:
+    image: business-day-backend
+    container_name: Gustavo_Maler
+    command: java -jar /app.jar
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://bd_sql:3306/db
+
+  mysqldb:
+    image: mysql
+    container_name: bd_sql
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_USER: usr
+      MYSQL_PASSWORD: pwd
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+    #volumes:
+    #  - ./.mysql:/var/lib/mysql
+    #command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 10s
+      retries: 10
