@@ -1,5 +1,6 @@
 package dev.hafnerp.springbootjparest05_hafner.models
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
 import lombok.*
 import java.time.LocalDate
@@ -26,6 +27,8 @@ class Event {
     var boothPrice : Double = 0.0
     @Column
     var bigBoothPrice : Double = 0.0
-    @OneToMany(mappedBy = "event", orphanRemoval = true, cascade = arrayOf(CascadeType.ALL))
-    lateinit var participations : ArrayList<Participation>
+
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "event")
+    @JsonManagedReference
+    var participations: MutableList<Participation> = mutableListOf()
 }
