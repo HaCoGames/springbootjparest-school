@@ -28,4 +28,7 @@ public class EventController {
     public Event create(@RequestBody Event entity) {
         return eventService.createEvent(entity);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) { eventService.deleteEvent(id); }
 }
