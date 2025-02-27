@@ -28,4 +28,7 @@ public class BoothController {
     public Booth create(@RequestBody Booth entity) {
         return boothService.createBooth(entity);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) { boothService.deleteBooth(id); }
 }

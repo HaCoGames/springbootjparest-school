@@ -26,4 +26,9 @@ public class BoothServiceImpl implements BoothService {
     public Booth createBooth(Booth entity) {
         return repo.save(entity);
     }
+
+    @Override
+    public void deleteBooth(Long id) {
+        repo.deleteById(id);
+    }
 }
