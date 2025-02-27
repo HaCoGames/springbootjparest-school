@@ -26,4 +26,9 @@ public class MailServiceImpl implements MailService {
     public Mail createMail(Mail entity) {
         return repo.save(entity);
     }
+
+    @Override
+    public void deleteMail(Long id) {
+        repo.deleteById(id);
+    }
 }

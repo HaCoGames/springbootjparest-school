@@ -28,4 +28,7 @@ public class MailController {
     public Mail create(@RequestBody Mail entity) {
         return mailService.createMail(entity);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) { mailService.deleteMail(id); }
 }

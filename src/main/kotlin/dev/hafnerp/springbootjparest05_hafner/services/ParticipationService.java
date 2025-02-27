@@ -8,4 +8,5 @@ public interface ParticipationService {
     List<Participation> getAllParticipations();
     Participation getParticipation(Long id);
     Participation createParticipation(Participation entity);
+    void deleteParticipation(Long id);
 }

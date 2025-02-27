@@ -28,4 +28,7 @@ public class ParticipationController {
     public Participation create(@RequestBody Participation entity) {
         return participationService.createParticipation(entity);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) { participationService.deleteParticipation(id); }
 }

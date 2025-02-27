@@ -8,4 +8,5 @@ public interface BoothService {
     List<Booth> getAllBooths();
     Booth getBooth(Long id);
     Booth createBooth(Booth entity);
+    void deleteBooth(Long id);
 }

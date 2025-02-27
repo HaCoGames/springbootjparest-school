@@ -8,4 +8,5 @@ public interface UserService {
     List<User> getAllUsers();
     User getUser(Long id);
     User createUser(User entity);
+    void deleteUser(Long id);
 }
