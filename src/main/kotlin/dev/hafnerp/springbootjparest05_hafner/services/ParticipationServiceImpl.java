@@ -26,4 +26,9 @@ public class ParticipationServiceImpl implements ParticipationService {
     public Participation createParticipation(Participation entity) {
         return repo.save(entity);
     }
+
+    @Override
+    public void deleteParticipation(Long id) {
+        repo.deleteById(id);
+    }
 }
