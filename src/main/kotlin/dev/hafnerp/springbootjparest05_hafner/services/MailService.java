@@ -8,4 +8,5 @@ public interface MailService {
     List<Mail> getAllMails();
     Mail getMail(Long id);
     Mail createMail(Mail entity);
+    void deleteMail(Long id);
 }
