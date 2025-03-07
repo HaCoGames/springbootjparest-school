@@ -23,7 +23,7 @@ class MailDTO {
     // Pass UserServiceImpl as a parameter
     public fun getMailObject(userService: UserServiceImpl): Mail {
         val _sender = userService.getUser(sender_id)
-        val _receivers = userService.getUser(receiver_id)
+        val _receivers:Company = userService.getUser(receiver_id) as Company
 
         println(_sender)
         println(_receivers)
