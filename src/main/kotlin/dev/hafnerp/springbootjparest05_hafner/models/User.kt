@@ -53,7 +53,7 @@ class Company(
     var comments: String
 ) : User(pwdToken, eMail, name) {
 
-    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "receiver")
+    @ManyToMany(mappedBy = "receivers")
     @JsonManagedReference
     var mails: MutableList<Mail> = mutableListOf()
 

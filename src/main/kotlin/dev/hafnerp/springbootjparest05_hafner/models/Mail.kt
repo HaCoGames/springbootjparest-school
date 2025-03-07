@@ -21,12 +21,16 @@ class Mail(
     var content: String,
 
     @ManyToOne
-    @JoinColumn(name = "sender_id")
+    @JoinColumn(name = "sender_id", nullable = false)
     @JsonBackReference
     var sender: User? = null,
 
-    @ManyToOne
-    @JoinColumn(name = "receiver_id")
+    @ManyToMany
+    @JoinTable(
+        name = "mail_receivers",
+        joinColumns = [JoinColumn(name = "mail_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "comp_id", referencedColumnName = "id")]
+    )
     @JsonBackReference
-    var receiver: User? = null
+    var receivers: MutableList<Company> = mutableListOf()
 )

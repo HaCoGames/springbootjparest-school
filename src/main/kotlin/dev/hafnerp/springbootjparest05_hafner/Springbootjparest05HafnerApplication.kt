@@ -1,9 +1,6 @@
 package dev.hafnerp.springbootjparest05_hafner
 
-import dev.hafnerp.springbootjparest05_hafner.models.Admin
-import dev.hafnerp.springbootjparest05_hafner.models.Booth
-import dev.hafnerp.springbootjparest05_hafner.models.Company
-import dev.hafnerp.springbootjparest05_hafner.models.Participation
+import dev.hafnerp.springbootjparest05_hafner.models.*
 import dev.hafnerp.springbootjparest05_hafner.repositories.BoothRepository
 import dev.hafnerp.springbootjparest05_hafner.repositories.EventRepository
 import dev.hafnerp.springbootjparest05_hafner.repositories.MailRepository
@@ -13,6 +10,7 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.stereotype.Component
+import java.time.LocalDateTime
 
 @SpringBootApplication
 class Springbootjparest05HafnerApplication
@@ -22,7 +20,7 @@ fun main(args: Array<String>) {
 }
 
 @Component
-class DemoDataRunner (
+class DemoDataRunner(
 	private val participationRepository: ParticipationRepository,
 	private val eventRepository: EventRepository,
 	private val boothRepository: BoothRepository,
@@ -74,17 +72,17 @@ class DemoDataRunner (
 		val savedBooth2 = boothRepository.save(booth2)
 
 		val participation1 = Participation(
-            price = 10.00,
-            paidUntilNow = 0.0,
-            comments = "This is a nice company!",
-            IF = false,
-            IT = false,
-            BT = false,
-            IR = false,
-            cntTables = 2,
-            needsPower = false,
-            needsSpace = 20
-        )
+			price = 10.00,
+			paidUntilNow = 0.0,
+			comments = "This is a nice company!",
+			IF = false,
+			IT = false,
+			BT = false,
+			IR = false,
+			cntTables = 2,
+			needsPower = false,
+			needsSpace = 20
+		)
 
 		participation1.booth = savedBooth1
 		participation1.company = company1
@@ -107,6 +105,16 @@ class DemoDataRunner (
 
 		val savedParticipation1 = participationRepository.save(participation1)
 		val savedParticipation2 = participationRepository.save(participation2)
-	}
 
+		val mail1 = Mail(
+			whenSent = LocalDateTime.now(),
+			subject = "Nothing!",
+			content = "I am the content",
+			sender = admin1
+		)
+
+		mail1.receivers.add(savedCompany1)
+
+		val savedMail1 = mailRepository.save(mail1)
+	}
 }

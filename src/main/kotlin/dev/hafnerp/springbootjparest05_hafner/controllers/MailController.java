@@ -1,10 +1,13 @@
 package dev.hafnerp.springbootjparest05_hafner.controllers;
 
 import dev.hafnerp.springbootjparest05_hafner.models.Mail;
+import dev.hafnerp.springbootjparest05_hafner.models.MailDTO;
 import dev.hafnerp.springbootjparest05_hafner.services.MailServiceImpl;
+import dev.hafnerp.springbootjparest05_hafner.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.List;
 
 @RestController
@@ -24,7 +27,7 @@ public class MailController {
         return mailService.getMail(id);
     }
 
-    @PostMapping("/")
+    @PostMapping(value = "/")
     public Mail create(@RequestBody Mail entity) {
         return mailService.createMail(entity);
     }
