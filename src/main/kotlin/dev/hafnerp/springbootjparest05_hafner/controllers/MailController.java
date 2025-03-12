@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/mails")
@@ -17,19 +18,23 @@ public class MailController {
     @Autowired
     private MailServiceImpl mailService;
 
+    @Autowired
+    private UserServiceImpl userService;
+
     @GetMapping("/")
-    public List<Mail> getAll() {
-        return mailService.getAllMails();
+    public List<MailDTO> getAll() {
+        return mailService.getAllMails().stream().map(MailDTO::getInstance).toList();
     }
 
     @GetMapping("/{id}")
-    public Mail getById(@PathVariable Long id) {
-        return mailService.getMail(id);
+    public MailDTO getById(@PathVariable Long id) {
+        return MailDTO.getInstance(mailService.getMail(id));
     }
 
     @PostMapping(value = "/")
-    public Mail create(@RequestBody Mail entity) {
-        return mailService.createMail(entity);
+    public Mail create(@RequestBody MailDTO entity) {
+
+        return mailService.createMail(MailDTO.getMailObject(mailService, userService, entity));
     }
 
     @DeleteMapping("/{id}")
