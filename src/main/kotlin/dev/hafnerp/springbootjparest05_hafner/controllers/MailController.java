@@ -32,9 +32,8 @@ public class MailController {
     }
 
     @PostMapping(value = "/")
-    public Mail create(@RequestBody MailDTO entity) {
-
-        return mailService.createMail(MailDTO.getMailObject(mailService, userService, entity));
+    public MailDTO create(@RequestBody MailDTO entity) {
+        return MailDTO.getInstance(mailService.createMail(MailDTO.getMailObject(mailService, userService, entity)));
     }
 
     @DeleteMapping("/{id}")

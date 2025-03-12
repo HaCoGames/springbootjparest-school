@@ -1,10 +1,7 @@
 package dev.hafnerp.springbootjparest05_hafner.models
 
-import dev.hafnerp.springbootjparest05_hafner.repositories.MailRepository
-import dev.hafnerp.springbootjparest05_hafner.repositories.UserRepository
 import dev.hafnerp.springbootjparest05_hafner.services.MailService
 import dev.hafnerp.springbootjparest05_hafner.services.UserService
-import dev.hafnerp.springbootjparest05_hafner.services.UserServiceImpl
 import java.time.LocalDateTime
 
 class MailDTO(
@@ -33,7 +30,7 @@ class MailDTO(
                 subject = mailDTO.subject,
                 content = mailDTO.content,
                 sender = if (mailDTO.sender != null) userRepository.getUser(mailDTO.sender!!) else null,
-                receivers = mutableListOf()
+                receivers = mailDTO.receivers.map { r -> userRepository.getUser(r) as Company }.toMutableList()
             )
         }
 
