@@ -1,0 +1,18 @@
+@baseurl=http://localhost:8080/api
+
+### get all the users
+
+GET {{baseurl}}/users/
+
+### post a new user
+
+POST {{baseurl}}/users/
+Content-Type: application/json
+
+{
+    "name": "HaCoGames",
+    "pwdToken": "I_AM_A_TOKEN_OF_HACO",
+    "type": "admin",
+    "eMail": "hafnerp@example.com",
+    "mails": []
+}
