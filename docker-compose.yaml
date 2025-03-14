@@ -1,4 +1,3 @@
-version: '2'
 services:
   Business-Day-Backend:
     image: business-day-backend

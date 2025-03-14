@@ -15,20 +15,17 @@ import java.time.LocalDate
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-class Event {
+class Event(
+    @Column
+    var _when: LocalDate,
+    @Column
+    var label: String,
+    @Column var boothPrice: Double,
+    @Column var bigBoothPrice: Double,
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "event")
+    @JsonManagedReference var participations: MutableList<Participation>
+) {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id : Long = 0
 
-    @Column
-    lateinit var _when : LocalDate
-    @Column
-    lateinit var label : String
-    @Column
-    var boothPrice : Double = 0.0
-    @Column
-    var bigBoothPrice : Double = 0.0
-
-    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "event")
-    @JsonManagedReference
-    var participations: MutableList<Participation> = mutableListOf()
 }

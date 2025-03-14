@@ -16,3 +16,39 @@ Content-Type: application/json
     "eMail": "hafnerp@example.com",
     "mails": []
 }
+
+### post a new user
+
+POST {{baseurl}}/users/
+Content-Type: application/json
+
+{
+    "name": "Max",
+    "pwdToken": "I_AM_A_TOKEN_OF_HACO",
+    "type": "admin",
+    "eMail": "milloni1@htl-villach.com",
+    "mails": []
+}
+
+### delete a user
+DELETE {{baseurl}}/users/1
+
+### get all mails from user 1
+
+GET {{baseurl}}/users/1/mails/
+
+### get all mails from user 2
+
+GET {{baseurl}}/users/2/mails/
+
+### get all mails from user 3
+
+GET {{baseurl}}/users/3/mails/
+
+### get all participation from user 1
+
+GET {{baseurl}}/users/1/participations/
+
+### get all participation from user 2
+
+GET {{baseurl}}/users/2/participations/
