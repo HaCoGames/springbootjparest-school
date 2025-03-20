@@ -9,4 +9,5 @@ public interface ParticipationService {
     Participation getParticipation(Long id);
     Participation createParticipation(Participation entity);
     void deleteParticipation(Long id);
+    Participation updateParticipation(Long id, Participation entity);
 }

@@ -31,4 +31,7 @@ public class ParticipationController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) { participationService.deleteParticipation(id); }
+
+    @PutMapping("/{id}")
+    public void update(@PathVariable Long id, @RequestBody Participation entity) { participationService.updateParticipation(id, entity); }
 }

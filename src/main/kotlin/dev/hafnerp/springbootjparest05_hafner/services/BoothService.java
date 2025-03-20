@@ -9,4 +9,5 @@ public interface BoothService {
     Booth getBooth(Long id);
     Booth createBooth(Booth entity);
     void deleteBooth(Long id);
+    Booth updateBooth(Long id, Booth entity);
 }
