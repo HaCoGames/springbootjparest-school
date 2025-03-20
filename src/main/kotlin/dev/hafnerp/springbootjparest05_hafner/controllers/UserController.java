@@ -148,4 +148,60 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) { userService.deleteUser(id); }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO entity) {
+        String type = entity.getType();
+        User userToUpdate;
+
+        if ("admin".equals(type)) {
+            Admin admin = new Admin(entity.getPwdToken(), entity.getEMail(), entity.getName());
+            admin.setMails(entity.getMails().stream().map(m -> MailDTO.getMailObject(mailService, userService, m)).toList());
+
+            userToUpdate = admin;
+        }
+        else if ("company".equals(type)) {
+            Company company = new Company(
+                    entity.getPwdToken(),
+                    entity.getEMail(),
+                    entity.getName(),
+                    entity.getResponsible(),
+                    entity.getPhone(),
+                    entity.getCcTo(),
+                    entity.getComments()
+            );
+            company.setMails(entity.getMails().stream().map(m -> MailDTO.getMailObject(mailService, userService, m)).toList());
+            company.setParticipations(entity.getParticipations().stream().map(p -> participationService.getParticipation(p)).toList());
+
+            userToUpdate = company;
+        }
+        else {
+            userToUpdate = new User(entity.getPwdToken(), entity.getEMail(), entity.getName());
+        }
+
+        userToUpdate.setId(id); // Ensure we update the correct entity
+
+        User updatedUser = userService.updateUser(id, userToUpdate);
+
+        UserDTO response = switch (type) {
+            case "admin" -> AdminDTO.getInstance((Admin) updatedUser);
+            case "company" -> CompanyDTO.getInstance((Company) updatedUser);
+            default -> new UserDTO(
+                    updatedUser.getId(),
+                    updatedUser.getName(),
+                    updatedUser.getEMail(),
+                    updatedUser.getPwdToken(),
+                    new ArrayList<>(),
+                    "user",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+        };
+
+        return ResponseEntity.ok(response);
+    }
+
 }

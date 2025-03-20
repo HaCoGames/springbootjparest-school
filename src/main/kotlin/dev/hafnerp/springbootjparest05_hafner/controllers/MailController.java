@@ -38,4 +38,7 @@ public class MailController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) { mailService.deleteMail(id); }
+
+    @PutMapping("/{id}")
+    public  void update(@PathVariable Long id, @RequestBody MailDTO entity) { mailService.updateMail(id, entity); }
 }

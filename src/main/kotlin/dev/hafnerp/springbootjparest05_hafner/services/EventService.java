@@ -9,4 +9,5 @@ public interface EventService {
     Event getEvent(Long id);
     Event createEvent(Event entity);
     void deleteEvent(Long id);
+    Event updateEvent(Long id, Event entity);
 }

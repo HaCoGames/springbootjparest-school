@@ -31,4 +31,7 @@ public class BoothController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) { boothService.deleteBooth(id); }
+
+    @PutMapping("/{id}")
+    public void update(@PathVariable Long id, @RequestBody Booth entity) { boothService.updateBooth(id, entity); }
 }
