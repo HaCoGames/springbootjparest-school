@@ -117,5 +117,16 @@ class DemoDataRunner(
 		mail1.receivers.add(savedCompany1)
 
 		val savedMail1 = mailRepository.save(mail1)
+
+		val mail2 = Mail(
+			whenSent = LocalDateTime.now(),
+			subject = "Nothing! - 2",
+			content = "I am the content - 2",
+			sender = admin1
+		)
+
+		mail1.receivers.add(savedCompany1)
+
+		val savedMail2 = mailRepository.save(mail2)
 	}
 }
